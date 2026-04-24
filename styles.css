@@ -307,12 +307,12 @@ a {
 
 .profile-panel {
   position: relative;
-  padding-top: 132px;
+  padding-top: 124px;
 }
 
 .theme-switch-wrap {
   position: absolute;
-  top: -72px;
+  top: -82px;
   right: 82px;
   z-index: 3;
 }
@@ -1064,10 +1064,12 @@ h2 {
   .profile-panel {
     max-width: none;
     width: 100%;
+    padding-top: 78px;
   }
 
   .theme-switch-wrap {
-    right: 18px;
+    top: 0;
+    right: 16px;
   }
 
   .status-bubble {
@@ -1228,6 +1230,10 @@ h2 {
     min-height: 292px;
   }
 
+  .profile-panel {
+    padding-top: 70px;
+  }
+
   .theme-switch {
     width: 104px;
     height: 50px;
@@ -1327,7 +1333,7 @@ h2 {
   }
 
   .theme-switch-wrap {
-    right: 10px;
+    right: 8px;
   }
 
   .portrait-code {

@@ -32,10 +32,6 @@
       </nav>
 
       <div class="topbar-actions">
-        <button class="theme-button" type="button" aria-label="Переключить темную тему" aria-pressed="false">
-          <span class="theme-icon" aria-hidden="true">☾</span>
-        </button>
-
         <div class="language" aria-label="Language switcher">
           <button class="lang-button active" type="button" data-lang="ru" aria-pressed="true">RU</button>
           <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
@@ -59,6 +55,16 @@
         </div>
 
         <aside class="profile-panel" aria-label="Profile summary">
+          <div class="theme-switch-wrap">
+            <button class="theme-switch" type="button" aria-label="Включить темную тему" aria-pressed="false">
+              <span class="theme-switch-text theme-switch-on">ON</span>
+              <span class="theme-switch-text theme-switch-off">OFF</span>
+              <span class="theme-switch-thumb" aria-hidden="true">
+                <span class="theme-thumb-icon theme-thumb-sun">☀</span>
+                <span class="theme-thumb-icon theme-thumb-moon">☾</span>
+              </span>
+            </button>
+          </div>
           <div class="status-bubble" data-i18n="hero.status">Открыт к диалогу</div>
           <div class="portrait-card">
             <div class="portrait-code">

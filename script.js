@@ -118,8 +118,7 @@ const translations = {
 };
 
 const languageButtons = document.querySelectorAll(".lang-button");
-const themeButton = document.querySelector(".theme-button");
-const themeIcon = document.querySelector(".theme-icon");
+const themeSwitch = document.querySelector(".theme-switch");
 const translatableNodes = document.querySelectorAll("[data-i18n]");
 const revealNodes = document.querySelectorAll(
   ".section, .card, .chip, .process-step, .case-stack span, .stats span",
@@ -131,10 +130,9 @@ function setTheme(theme) {
   document.documentElement.dataset.theme = theme;
   localStorage.setItem("site-theme", theme);
 
-  if (themeButton && themeIcon) {
-    themeButton.setAttribute("aria-pressed", String(isDark));
-    themeButton.setAttribute("aria-label", isDark ? "Переключить светлую тему" : "Переключить темную тему");
-    themeIcon.textContent = isDark ? "☀" : "☾";
+  if (themeSwitch) {
+    themeSwitch.setAttribute("aria-pressed", String(isDark));
+    themeSwitch.setAttribute("aria-label", isDark ? "Включить светлую тему" : "Включить темную тему");
   }
 }
 
@@ -176,8 +174,8 @@ languageButtons.forEach((button) => {
 setLanguage(localStorage.getItem("site-language") || "ru");
 setTheme(getInitialTheme());
 
-if (themeButton) {
-  themeButton.addEventListener("click", () => {
+if (themeSwitch) {
+  themeSwitch.addEventListener("click", () => {
     const currentTheme = document.documentElement.dataset.theme || getInitialTheme();
     setTheme(currentTheme === "dark" ? "light" : "dark");
   });

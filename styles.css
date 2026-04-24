@@ -177,38 +177,6 @@ a {
   background: var(--paper);
 }
 
-.theme-button {
-  display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  color: var(--ink);
-  background: var(--paper);
-  font: inherit;
-  cursor: pointer;
-  transition:
-    transform 160ms ease,
-    border-color 160ms ease,
-    background 160ms ease;
-}
-
-.theme-button:hover {
-  border-color: var(--ink);
-  transform: translateY(-1px);
-}
-
-.theme-button:active {
-  transform: translateY(0);
-}
-
-.theme-icon {
-  display: block;
-  font-size: 17px;
-  line-height: 1;
-}
-
 .lang-button {
   min-width: 38px;
   height: 30px;
@@ -339,11 +307,160 @@ a {
 
 .profile-panel {
   position: relative;
+  padding-top: 72px;
+}
+
+.theme-switch-wrap {
+  position: absolute;
+  top: 0;
+  right: 82px;
+  z-index: 3;
+}
+
+.theme-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 116px;
+  height: 56px;
+  padding: 0 17px;
+  border: 0;
+  border-radius: 999px;
+  color: rgba(17, 17, 19, 0.34);
+  background: #e8e8e8;
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.86),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.08),
+    0 12px 24px rgba(28, 31, 40, 0.14);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 850;
+  cursor: pointer;
+  transition:
+    background 220ms ease,
+    color 220ms ease,
+    box-shadow 220ms ease,
+    transform 180ms ease;
+}
+
+.theme-switch:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.86),
+    inset 0 -10px 20px rgba(0, 0, 0, 0.08),
+    0 16px 30px rgba(28, 31, 40, 0.18);
+}
+
+.theme-switch:active {
+  transform: translateY(0);
+}
+
+.theme-switch-text {
+  position: relative;
+  z-index: 2;
+  line-height: 1;
+  transition:
+    color 180ms ease,
+    opacity 180ms ease;
+}
+
+.theme-switch-on {
+  color: rgba(255, 255, 255, 0);
+}
+
+.theme-switch-off {
+  color: rgba(17, 17, 19, 0.28);
+}
+
+.theme-switch-thumb {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(240, 240, 240, 0.94));
+  box-shadow:
+    0 10px 20px rgba(17, 17, 19, 0.22),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  transition:
+    left 220ms cubic-bezier(0.21, 0.61, 0.35, 1),
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.theme-thumb-icon {
+  grid-area: 1 / 1;
+  color: #111113;
+  font-size: 20px;
+  line-height: 1;
+  transition:
+    opacity 180ms ease,
+    scale 180ms ease,
+    rotate 180ms ease;
+}
+
+.theme-thumb-sun {
+  color: #f7b45a;
+  opacity: 1;
+  scale: 1;
+  rotate: 0deg;
+}
+
+.theme-thumb-moon {
+  color: #5f6c86;
+  opacity: 0;
+  scale: 0.72;
+  rotate: -20deg;
+}
+
+:root[data-theme="dark"] .theme-switch {
+  color: rgba(255, 255, 255, 0.82);
+  background: linear-gradient(180deg, #22d867, #05b849);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.28),
+    inset 0 -10px 18px rgba(0, 0, 0, 0.12),
+    0 16px 32px rgba(0, 0, 0, 0.32);
+}
+
+:root[data-theme="dark"] .theme-switch-on {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+:root[data-theme="dark"] .theme-switch-off {
+  color: rgba(255, 255, 255, 0);
+}
+
+:root[data-theme="dark"] .theme-switch-thumb {
+  left: 64px;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(241, 244, 242, 0.94));
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.3),
+    inset 0 1px 1px rgba(255, 255, 255, 0.95);
+}
+
+:root[data-theme="dark"] .theme-thumb-sun {
+  opacity: 0;
+  scale: 0.72;
+  rotate: 20deg;
+}
+
+:root[data-theme="dark"] .theme-thumb-moon {
+  color: #2c3444;
+  opacity: 1;
+  scale: 1;
+  rotate: 0deg;
 }
 
 .status-bubble {
   position: absolute;
-  top: -18px;
+  top: 54px;
   right: -4px;
   z-index: 2;
   padding: 9px 14px;
@@ -949,8 +1066,12 @@ h2 {
     width: 100%;
   }
 
+  .theme-switch-wrap {
+    right: 18px;
+  }
+
   .status-bubble {
-    top: -16px;
+    top: 54px;
     right: 12px;
     max-width: calc(100% - 24px);
     font-size: 12px;
@@ -1107,6 +1228,26 @@ h2 {
     min-height: 292px;
   }
 
+  .theme-switch {
+    width: 104px;
+    height: 50px;
+    padding-inline: 15px;
+    font-size: 13px;
+  }
+
+  .theme-switch-thumb {
+    width: 42px;
+    height: 42px;
+  }
+
+  .theme-thumb-icon {
+    font-size: 18px;
+  }
+
+  :root[data-theme="dark"] .theme-switch-thumb {
+    left: 58px;
+  }
+
   .portrait-code {
     font-size: 10px;
   }
@@ -1183,6 +1324,10 @@ h2 {
   .portrait-card {
     min-height: 276px;
     padding: 16px;
+  }
+
+  .theme-switch-wrap {
+    right: 10px;
   }
 
   .portrait-code {

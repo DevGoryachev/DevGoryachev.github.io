@@ -8,6 +8,11 @@
       content="Горячев Никита, DevGoryachev. Middle 1C developer: доработки, интеграции, отчеты, обмены, расширения и инструменты для 1С."
     />
     <title>DevGoryachev | 1C Developer</title>
+    <script>
+      const savedTheme = localStorage.getItem("site-theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = savedTheme || (prefersDark ? "dark" : "light");
+    </script>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -26,9 +31,15 @@
         <a href="#contact" data-i18n="nav.contact">Контакты</a>
       </nav>
 
-      <div class="language" aria-label="Language switcher">
-        <button class="lang-button active" type="button" data-lang="ru" aria-pressed="true">RU</button>
-        <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+      <div class="topbar-actions">
+        <button class="theme-button" type="button" aria-label="Переключить темную тему" aria-pressed="false">
+          <span class="theme-icon" aria-hidden="true">☾</span>
+        </button>
+
+        <div class="language" aria-label="Language switcher">
+          <button class="lang-button active" type="button" data-lang="ru" aria-pressed="true">RU</button>
+          <button class="lang-button" type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
       </div>
     </header>
 

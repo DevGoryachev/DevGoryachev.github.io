@@ -118,10 +118,35 @@ const translations = {
 };
 
 const languageButtons = document.querySelectorAll(".lang-button");
+const themeButton = document.querySelector(".theme-button");
+const themeIcon = document.querySelector(".theme-icon");
 const translatableNodes = document.querySelectorAll("[data-i18n]");
 const revealNodes = document.querySelectorAll(
   ".section, .card, .chip, .process-step, .case-stack span, .stats span",
 );
+
+function setTheme(theme) {
+  const isDark = theme === "dark";
+
+  document.documentElement.dataset.theme = theme;
+  localStorage.setItem("site-theme", theme);
+
+  if (themeButton && themeIcon) {
+    themeButton.setAttribute("aria-pressed", String(isDark));
+    themeButton.setAttribute("aria-label", isDark ? "Переключить светлую тему" : "Переключить темную тему");
+    themeIcon.textContent = isDark ? "☀" : "☾";
+  }
+}
+
+function getInitialTheme() {
+  const savedTheme = localStorage.getItem("site-theme");
+
+  if (savedTheme === "dark" || savedTheme === "light") {
+    return savedTheme;
+  }
+
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
 
 function setLanguage(language) {
   const dictionary = translations[language];
@@ -149,6 +174,14 @@ languageButtons.forEach((button) => {
 });
 
 setLanguage(localStorage.getItem("site-language") || "ru");
+setTheme(getInitialTheme());
+
+if (themeButton) {
+  themeButton.addEventListener("click", () => {
+    const currentTheme = document.documentElement.dataset.theme || getInitialTheme();
+    setTheme(currentTheme === "dark" ? "light" : "dark");
+  });
+}
 
 function initRevealAnimations() {
   const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

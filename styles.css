@@ -307,12 +307,12 @@ a {
 
 .profile-panel {
   position: relative;
-  padding-top: 72px;
+  padding-top: 92px;
 }
 
 .theme-switch-wrap {
   position: absolute;
-  top: 0;
+  top: -8px;
   right: 82px;
   z-index: 3;
 }

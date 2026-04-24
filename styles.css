@@ -224,6 +224,7 @@ a {
 }
 
 .hero {
+  position: relative;
   display: grid;
   grid-template-columns: minmax(0, 1.38fr) minmax(320px, 0.62fr);
   gap: 52px;
@@ -312,8 +313,8 @@ a {
 
 .theme-switch-wrap {
   position: absolute;
-  top: -82px;
-  right: 82px;
+  top: 76px;
+  right: 96px;
   z-index: 3;
 }
 
@@ -1040,8 +1041,13 @@ h2 {
 
   .hero {
     gap: 30px;
-    padding-top: 34px;
+    padding-top: 112px;
     padding-bottom: 46px;
+  }
+
+  .hero .theme-switch-wrap {
+    top: 22px;
+    right: 0;
   }
 
   .hero h1 {
@@ -1064,12 +1070,7 @@ h2 {
   .profile-panel {
     max-width: none;
     width: 100%;
-    padding-top: 78px;
-  }
-
-  .theme-switch-wrap {
-    top: 0;
-    right: 16px;
+    padding-top: 0;
   }
 
   .status-bubble {
@@ -1209,7 +1210,7 @@ h2 {
   }
 
   .hero {
-    padding-top: 28px;
+    padding-top: 104px;
   }
 
   .hero h1 {
@@ -1231,7 +1232,7 @@ h2 {
   }
 
   .profile-panel {
-    padding-top: 70px;
+    padding-top: 0;
   }
 
   .theme-switch {
@@ -1333,7 +1334,7 @@ h2 {
   }
 
   .theme-switch-wrap {
-    right: 8px;
+    right: 0;
   }
 
   .portrait-code {

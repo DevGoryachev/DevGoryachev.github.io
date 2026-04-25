@@ -127,8 +127,8 @@ const revealNodes = document.querySelectorAll(
 );
 let themeTransitionTimer;
 let languageTransitionTimer;
-const languageOutDuration = 180;
-const languageInDuration = 360;
+const languageMagicSwapDelay = 140;
+const languageMagicDuration = 320;
 
 function setTheme(theme, options = {}) {
   const isDark = theme === "dark";
@@ -197,7 +197,7 @@ function setLanguage(language, options = {}) {
   }
 
   clearTimeout(languageTransitionTimer);
-  document.documentElement.classList.remove("language-out", "language-in");
+  document.documentElement.classList.remove("language-magic");
   document.documentElement.dataset.activeLanguage = language;
   languageButtons.forEach((button) => {
     const isActive = button.dataset.lang === language;
@@ -207,17 +207,15 @@ function setLanguage(language, options = {}) {
   localStorage.setItem("site-language", language);
 
   requestAnimationFrame(() => {
-    document.documentElement.classList.add("language-out");
+    document.documentElement.classList.add("language-magic");
 
     languageTransitionTimer = setTimeout(() => {
       applyLanguage(language);
-      document.documentElement.classList.remove("language-out");
-      document.documentElement.classList.add("language-in");
 
       languageTransitionTimer = setTimeout(() => {
-        document.documentElement.classList.remove("language-in");
-      }, languageInDuration);
-    }, languageOutDuration);
+        document.documentElement.classList.remove("language-magic");
+      }, languageMagicDuration - languageMagicSwapDelay);
+    }, languageMagicSwapDelay);
   });
 }
 

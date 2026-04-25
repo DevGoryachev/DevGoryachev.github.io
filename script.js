@@ -125,6 +125,8 @@ const revealNodes = document.querySelectorAll(
 );
 let themeTransitionTimer;
 let languageTransitionTimer;
+const languageLeaveDuration = 260;
+const languageEnterDuration = 520;
 
 function setTheme(theme, options = {}) {
   const isDark = theme === "dark";
@@ -202,8 +204,8 @@ function setLanguage(language, options = {}) {
 
     languageTransitionTimer = setTimeout(() => {
       document.documentElement.classList.remove("language-entering");
-    }, 260);
-  }, 150);
+    }, languageEnterDuration);
+  }, languageLeaveDuration);
 }
 
 languageButtons.forEach((button) => {

@@ -231,19 +231,29 @@ a {
 
 [data-i18n] {
   transition:
-    opacity 150ms ease,
-    transform 150ms ease,
-    filter 150ms ease;
+    opacity 260ms cubic-bezier(0.21, 0.61, 0.35, 1),
+    transform 260ms cubic-bezier(0.21, 0.61, 0.35, 1),
+    filter 260ms cubic-bezier(0.21, 0.61, 0.35, 1);
+  transition-delay: var(--language-delay, 0ms);
 }
 
 html.language-leaving [data-i18n] {
   opacity: 0;
-  filter: blur(2px);
-  transform: translateY(6px);
+  filter: blur(1.5px);
+  transform: translateY(8px);
 }
 
 html.language-entering [data-i18n] {
-  animation: languageEnter 260ms cubic-bezier(0.21, 0.61, 0.35, 1) both;
+  animation: languageEnter 520ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: var(--language-delay, 0ms);
+}
+
+[data-i18n]:nth-of-type(2n) {
+  --language-delay: 20ms;
+}
+
+[data-i18n]:nth-of-type(3n) {
+  --language-delay: 40ms;
 }
 
 .section {
@@ -948,8 +958,8 @@ h2 {
 @keyframes languageEnter {
   from {
     opacity: 0;
-    filter: blur(2px);
-    transform: translateY(-6px);
+    filter: blur(1.5px);
+    transform: translateY(-8px);
   }
 
   to {

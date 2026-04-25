@@ -126,6 +126,8 @@ const revealNodes = document.querySelectorAll(
   ".section:not(.hero), .card, .chip, .process-step, .case-stack span, .stats span",
 );
 let themeTransitionTimer;
+let languageMotionTimer;
+const languageMotionDuration = 360;
 
 function setTheme(theme, options = {}) {
   const isDark = theme === "dark";
@@ -193,7 +195,17 @@ function setLanguage(language, options = {}) {
     return;
   }
 
+  clearTimeout(languageMotionTimer);
+  document.documentElement.classList.remove("language-motion");
   applyLanguage(language);
+
+  requestAnimationFrame(() => {
+    document.documentElement.classList.add("language-motion");
+
+    languageMotionTimer = setTimeout(() => {
+      document.documentElement.classList.remove("language-motion");
+    }, languageMotionDuration);
+  });
 }
 
 languageButtons.forEach((button) => {

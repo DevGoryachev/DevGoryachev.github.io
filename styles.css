@@ -1,5 +1,8 @@
 :root {
   color-scheme: light;
+  --theme-duration: 360ms;
+  --theme-ease: cubic-bezier(0.21, 0.61, 0.35, 1);
+  --switch-thumb-shift: 46px;
   --bg: #f7f7f4;
   --paper: #ffffff;
   --ink: #111113;
@@ -67,8 +70,25 @@ body {
     Arial, sans-serif;
   line-height: 1.5;
   transition:
-    color 180ms ease,
-    background 180ms ease;
+    color var(--theme-duration) var(--theme-ease),
+    background-color var(--theme-duration) var(--theme-ease);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background: var(--bg);
+  transition: background-color var(--theme-duration) var(--theme-ease);
+}
+
+html.theme-changing *,
+html.theme-changing *::before,
+html.theme-changing *::after {
+  transition-duration: var(--theme-duration) !important;
+  transition-timing-function: var(--theme-ease) !important;
 }
 
 a {
@@ -108,6 +128,9 @@ a {
   background: var(--topbar-bg);
   backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line);
+  transition:
+    background-color var(--theme-duration) var(--theme-ease),
+    border-color var(--theme-duration) var(--theme-ease);
 }
 
 .brand,
@@ -138,7 +161,7 @@ a {
   font-size: 12px;
   transition:
     transform 180ms ease,
-    background 180ms ease,
+    background-color var(--theme-duration) var(--theme-ease),
     color 180ms ease;
 }
 
@@ -175,6 +198,9 @@ a {
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--paper);
+  transition:
+    background-color var(--theme-duration) var(--theme-ease),
+    border-color var(--theme-duration) var(--theme-ease);
 }
 
 .lang-button {
@@ -323,9 +349,9 @@ a {
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
-  width: 116px;
-  height: 56px;
-  padding: 0 17px;
+  width: 88px;
+  height: 42px;
+  padding: 0 12px;
   border: 0;
   border-radius: 999px;
   color: rgba(17, 17, 19, 0.34);
@@ -335,11 +361,11 @@ a {
     inset 0 -10px 20px rgba(0, 0, 0, 0.08),
     0 12px 24px rgba(28, 31, 40, 0.14);
   font: inherit;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: 850;
   cursor: pointer;
   transition:
-    background 220ms ease,
+    background-color 260ms var(--theme-ease),
     color 220ms ease,
     box-shadow 220ms ease,
     transform 180ms ease;
@@ -381,8 +407,8 @@ a {
   z-index: 1;
   display: grid;
   place-items: center;
-  width: 48px;
-  height: 48px;
+  width: 34px;
+  height: 34px;
   border-radius: 999px;
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(240, 240, 240, 0.94));
@@ -390,15 +416,16 @@ a {
     0 10px 20px rgba(17, 17, 19, 0.22),
     inset 0 1px 1px rgba(255, 255, 255, 0.95);
   transition:
-    left 220ms cubic-bezier(0.21, 0.61, 0.35, 1),
-    background 220ms ease,
+    transform 300ms var(--theme-ease),
+    background-color 260ms var(--theme-ease),
     box-shadow 220ms ease;
+  will-change: transform;
 }
 
 .theme-thumb-icon {
   grid-area: 1 / 1;
   color: #111113;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1;
   transition:
     opacity 180ms ease,
@@ -438,7 +465,7 @@ a {
 }
 
 :root[data-theme="dark"] .theme-switch-thumb {
-  left: 64px;
+  transform: translateX(var(--switch-thumb-shift));
   background:
     linear-gradient(145deg, rgba(255, 255, 255, 0.98), rgba(241, 244, 242, 0.94));
   box-shadow:
@@ -489,7 +516,8 @@ a {
   animation: cardEnter 840ms 180ms cubic-bezier(0.21, 0.61, 0.35, 1) both;
   transition:
     transform 260ms ease,
-    box-shadow 260ms ease;
+    box-shadow 260ms ease,
+    border-color var(--theme-duration) var(--theme-ease);
 }
 
 .portrait-card:hover {
@@ -587,7 +615,7 @@ a {
   transition:
     transform 160ms ease,
     border-color 160ms ease,
-    background 160ms ease;
+    background-color var(--theme-duration) var(--theme-ease);
 }
 
 .stats span:hover,
@@ -722,7 +750,7 @@ h2 {
     transform 220ms ease,
     box-shadow 220ms ease,
     border-color 220ms ease,
-    background 220ms ease;
+    background-color var(--theme-duration) var(--theme-ease);
 }
 
 .card:hover {
@@ -768,7 +796,8 @@ h2 {
   transition:
     transform 220ms ease,
     box-shadow 220ms ease,
-    border-color 220ms ease;
+    border-color 220ms ease,
+    background-color var(--theme-duration) var(--theme-ease);
 }
 
 .case-study:hover {
@@ -811,7 +840,7 @@ h2 {
   transition:
     transform 220ms ease,
     box-shadow 220ms ease,
-    background 220ms ease;
+    background-color var(--theme-duration) var(--theme-ease);
 }
 
 .process-step:hover {
@@ -1041,13 +1070,16 @@ h2 {
 
   .hero {
     gap: 30px;
-    padding-top: 112px;
+    padding-top: 48px;
     padding-bottom: 46px;
+    max-width: calc(100vw - 24px);
   }
 
   .hero .theme-switch-wrap {
-    top: 22px;
-    right: 0;
+    position: static;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 4px;
   }
 
   .hero h1 {
@@ -1074,8 +1106,9 @@ h2 {
   }
 
   .status-bubble {
-    top: 54px;
-    right: 12px;
+    position: static;
+    display: inline-flex;
+    margin: 0 0 12px;
     max-width: calc(100% - 24px);
     font-size: 12px;
   }
@@ -1210,7 +1243,7 @@ h2 {
   }
 
   .hero {
-    padding-top: 104px;
+    padding-top: 42px;
   }
 
   .hero h1 {
@@ -1236,23 +1269,20 @@ h2 {
   }
 
   .theme-switch {
-    width: 104px;
-    height: 50px;
-    padding-inline: 15px;
-    font-size: 13px;
+    --switch-thumb-shift: 42px;
+    width: 80px;
+    height: 40px;
+    padding-inline: 11px;
+    font-size: 11px;
   }
 
   .theme-switch-thumb {
-    width: 42px;
-    height: 42px;
+    width: 32px;
+    height: 32px;
   }
 
   .theme-thumb-icon {
-    font-size: 18px;
-  }
-
-  :root[data-theme="dark"] .theme-switch-thumb {
-    left: 58px;
+    font-size: 15px;
   }
 
   .portrait-code {
@@ -1333,10 +1363,6 @@ h2 {
     padding: 16px;
   }
 
-  .theme-switch-wrap {
-    right: 0;
-  }
-
   .portrait-code {
     font-size: 9px;
   }
@@ -1359,6 +1385,29 @@ h2 {
   }
 }
 
+@media (max-width: 640px), (hover: none) and (pointer: coarse) {
+  .page-grid,
+  .portrait-card::after,
+  .status-bubble {
+    animation: none;
+  }
+
+  .page-grid {
+    background-position: 0 0;
+  }
+
+  .reveal {
+    transition-duration: 420ms;
+  }
+
+  .portrait-card,
+  .card,
+  .case-study,
+  .process-step {
+    box-shadow: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1372,5 +1421,11 @@ h2 {
   .reveal {
     opacity: 1;
     translate: none;
+  }
+
+  .page-grid,
+  .portrait-card::after,
+  .status-bubble {
+    animation: none !important;
   }
 }

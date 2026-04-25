@@ -123,9 +123,19 @@ const translatableNodes = document.querySelectorAll("[data-i18n]");
 const revealNodes = document.querySelectorAll(
   ".section, .card, .chip, .process-step, .case-stack span, .stats span",
 );
+let themeTransitionTimer;
 
-function setTheme(theme) {
+function setTheme(theme, options = {}) {
   const isDark = theme === "dark";
+  const shouldAnimate = options.animate === true;
+
+  if (shouldAnimate) {
+    clearTimeout(themeTransitionTimer);
+    document.documentElement.classList.add("theme-changing");
+    themeTransitionTimer = setTimeout(() => {
+      document.documentElement.classList.remove("theme-changing");
+    }, 420);
+  }
 
   document.documentElement.dataset.theme = theme;
   localStorage.setItem("site-theme", theme);
@@ -172,12 +182,12 @@ languageButtons.forEach((button) => {
 });
 
 setLanguage(localStorage.getItem("site-language") || "ru");
-setTheme(getInitialTheme());
+setTheme(getInitialTheme(), { animate: false });
 
 if (themeSwitch) {
   themeSwitch.addEventListener("click", () => {
     const currentTheme = document.documentElement.dataset.theme || getInitialTheme();
-    setTheme(currentTheme === "dark" ? "light" : "dark");
+    setTheme(currentTheme === "dark" ? "light" : "dark", { animate: true });
   });
 }
 

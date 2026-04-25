@@ -193,17 +193,43 @@ a {
 }
 
 .language {
+  position: relative;
   gap: 4px;
   padding: 4px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: var(--paper);
+  --language-thumb-shift: 42px;
   transition:
     background-color var(--theme-duration) var(--theme-ease),
     border-color var(--theme-duration) var(--theme-ease);
 }
 
+.language::before {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  z-index: 0;
+  width: 38px;
+  height: 30px;
+  border-radius: 6px;
+  background: var(--ink);
+  box-shadow: 0 6px 14px rgba(17, 17, 19, 0.16);
+  transform: translateX(0);
+  transition:
+    transform 320ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color var(--theme-duration) var(--theme-ease),
+    box-shadow 220ms ease;
+}
+
+html[data-active-language="en"] .language::before {
+  transform: translateX(var(--language-thumb-shift));
+}
+
 .lang-button {
+  position: relative;
+  z-index: 1;
   min-width: 38px;
   height: 30px;
   border: 0;
@@ -216,8 +242,8 @@ a {
   cursor: pointer;
   transition:
     color 160ms ease,
-    background 160ms ease,
-    transform 160ms ease;
+    transform 160ms ease,
+    scale 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .lang-button:hover {
@@ -225,8 +251,18 @@ a {
 }
 
 .lang-button.active {
+  background: transparent;
+}
+
+html[data-active-language="ru"] .lang-button[data-lang="ru"],
+html[data-active-language="en"] .lang-button[data-lang="en"],
+.lang-button.active {
   color: var(--paper);
-  background: var(--ink);
+}
+
+html[data-active-language="ru"] .lang-button[data-lang="ru"],
+html[data-active-language="en"] .lang-button[data-lang="en"] {
+  scale: 1.03;
 }
 
 [data-i18n] {
@@ -1166,10 +1202,18 @@ h2 {
 
   .language {
     padding: 3px;
+    --language-thumb-shift: 40px;
   }
 
   .lang-button {
     min-width: 36px;
+    height: 28px;
+  }
+
+  .language::before {
+    top: 3px;
+    left: 3px;
+    width: 36px;
     height: 28px;
   }
 
@@ -1463,6 +1507,14 @@ h2 {
 
   .lang-button {
     min-width: 34px;
+  }
+
+  .language {
+    --language-thumb-shift: 38px;
+  }
+
+  .language::before {
+    width: 34px;
   }
 
   .nav {

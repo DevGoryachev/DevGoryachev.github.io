@@ -163,6 +163,8 @@ function getInitialTheme() {
 function applyLanguage(language) {
   const dictionary = translations[language];
 
+  document.documentElement.dataset.activeLanguage = language;
+
   translatableNodes.forEach((node) => {
     const key = node.dataset.i18n;
 
@@ -197,6 +199,7 @@ function setLanguage(language, options = {}) {
   }
 
   document.documentElement.classList.add("language-leaving");
+  document.documentElement.dataset.activeLanguage = language;
 
   languageTransitionTimer = setTimeout(() => {
     applyLanguage(language);

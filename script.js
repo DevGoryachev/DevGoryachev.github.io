@@ -12,6 +12,7 @@ const translations = {
     "hero.status": "Открыт к диалогу",
     "stats.exp": "3+ года опыта",
     "stats.level": "Middle",
+    "stats.company": "SOKOLOV",
     "about.kicker": "About me",
     "about.title": "Спокойно разбираюсь в сложных 1С-задачах",
     "about.text1":
@@ -70,6 +71,7 @@ const translations = {
     "hero.status": "Open to talk",
     "stats.exp": "3+ years",
     "stats.level": "Middle",
+    "stats.company": "SOKOLOV",
     "about.kicker": "About me",
     "about.title": "I calmly untangle complex 1C tasks",
     "about.text1":

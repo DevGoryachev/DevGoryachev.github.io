@@ -126,8 +126,6 @@ const revealNodes = document.querySelectorAll(
   ".section:not(.hero), .card, .chip, .process-step, .case-stack span, .stats span",
 );
 let themeTransitionTimer;
-let languageTransitionTimer;
-const languageTransitionDuration = 260;
 
 function setTheme(theme, options = {}) {
   const isDark = theme === "dark";
@@ -190,20 +188,12 @@ function setLanguage(language, options = {}) {
     language !== currentLanguage &&
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  clearTimeout(languageTransitionTimer);
-  document.documentElement.classList.remove("language-settling");
-
   if (!shouldAnimate) {
     applyLanguage(language);
     return;
   }
 
   applyLanguage(language);
-  document.documentElement.classList.add("language-settling");
-
-  languageTransitionTimer = setTimeout(() => {
-    document.documentElement.classList.remove("language-settling");
-  }, languageTransitionDuration);
 }
 
 languageButtons.forEach((button) => {

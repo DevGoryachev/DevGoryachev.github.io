@@ -1310,7 +1310,7 @@ h2 {
   .hero .theme-switch-wrap {
     position: static;
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     margin-bottom: 4px;
   }
 

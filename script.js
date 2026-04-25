@@ -1,63 +1,4 @@
 const translations = {
-  ru: {
-    "nav.about": "Обо мне",
-    "nav.work": "Опыт",
-    "nav.case": "Кейс",
-    "nav.contact": "Контакты",
-    "hero.eyebrow": "Middle 1C Developer · 3+ года опыта",
-    "hero.lead":
-      "Я Горячев Никита. Дорабатываю 1С, проектирую обмены, делаю отчеты, интеграции и инструменты, которые помогают разработчикам работать быстрее.",
-    "hero.telegram": "Написать в Telegram",
-    "hero.github": "GitHub",
-    "hero.status": "Открыт к диалогу",
-    "stats.exp": "3+ года опыта",
-    "stats.level": "Middle",
-    "stats.company": "SOKOLOV",
-    "about.kicker": "About me",
-    "about.title": "Спокойно разбираюсь в сложных 1С-задачах",
-    "about.text1":
-      "Работаю с типовыми и нетиповыми конфигурациями: дорабатываю функционал, настраиваю обмены между базами, создаю отчеты, расширения и интеграции.",
-    "about.text2":
-      "Сейчас работаю в SOKOLOV. До этого был в стартапе, где команда создавала конфигурацию с нуля, поэтому мне близки и поддержка зрелых систем, и разработка новых механизмов.",
-    "services.title": "Я занимаюсь",
-    "services.item1": "доработками 1С",
-    "services.item2": "интеграциями между базами",
-    "services.item3": "отчетами",
-    "services.item4": "обменами",
-    "services.item5": "расширениями",
-    "services.item6": "оптимизацией",
-    "services.item7": "MCP-серверами и rules для 1С",
-    "work.kicker": "Experience",
-    "work.title": "Опыт и инструменты",
-    "work.card1.title": "SOKOLOV",
-    "work.card1.text":
-      "Разработка и сопровождение 1С в рабочей продуктовой среде: доработки, консультации, отчеты и поддержка бизнес-процессов.",
-    "work.card2.title": "Стартап-конфигурация",
-    "work.card2.text":
-      "Участвовал в создании конфигурации с нуля: проектирование механизмов, прикладная разработка и доведение решений до рабочего состояния.",
-    "work.card3.title": "Современный стек",
-    "work.card3.text":
-      "Использую EDT, Codex, Cursor, MCP-серверы, специальные skills и rules, чтобы ускорять анализ, разработку и сопровождение 1С-кода.",
-    "case.label": "Selected case",
-    "case.title": "Разбор адресов через локальную языковую модель",
-    "case.text":
-      "Спроектировал и внедрил кастомный механизм разбора и нормализации адреса через Ollama и Gemma-3 вместо типового механизма БСП.",
-    "process.title": "Как я работаю",
-    "process.step1.title": "Разбираю задачу",
-    "process.step1.text": "Фиксирую цель, ограничения, роли, данные и точки риска.",
-    "process.step2.title": "Проектирую решение",
-    "process.step2.text": "Выбираю минимально рискованный путь без лишнего усложнения.",
-    "process.step3.title": "Разработка",
-    "process.step3.text": "Учитываю клиент-серверную архитектуру, права и производительность.",
-    "process.step4.title": "Проверяю результат",
-    "process.step4.text": "Описываю проверку, риски и что важно не сломать при внедрении.",
-    "contact.kicker": "Contact",
-    "contact.title": "Можно обсудить задачу, опыт или проект",
-    "contact.text": "Напиши в Telegram или посмотри код и эксперименты на GitHub.",
-    "contact.telegram": "Telegram",
-    "contact.github": "GitHub",
-    "footer.text": "1C Developer · personal website",
-  },
   en: {
     "nav.about": "About",
     "nav.work": "Experience",
@@ -129,6 +70,15 @@ let themeTransitionTimer;
 let languageTransitionTimer;
 const languageMagicSwapDelay = 140;
 const languageMagicDuration = 320;
+
+function getDefaultTranslations() {
+  return Array.from(translatableNodes).reduce((dictionary, node) => {
+    dictionary[node.dataset.i18n] = node.textContent.trim().replace(/\s+/g, " ");
+    return dictionary;
+  }, {});
+}
+
+translations.ru = getDefaultTranslations();
 
 function setTheme(theme, options = {}) {
   const isDark = theme === "dark";

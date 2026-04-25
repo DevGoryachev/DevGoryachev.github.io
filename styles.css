@@ -61,6 +61,7 @@ html {
 }
 
 body {
+  overflow-x: hidden;
   min-width: 320px;
   margin: 0;
   color: var(--ink);
@@ -320,7 +321,7 @@ html.language-settling [data-i18n] {
 .hero h1 {
   max-width: 920px;
   margin: 0;
-  font-size: clamp(72px, 13vw, 178px);
+  font-size: clamp(54px, 12vw, 178px);
   line-height: 0.86;
   letter-spacing: 0;
   overflow-wrap: anywhere;
@@ -881,6 +882,7 @@ h2 {
 .case-content h2 {
   max-width: 760px;
   font-size: clamp(34px, 5vw, 66px);
+  overflow-wrap: break-word;
 }
 
 .case-content p {
@@ -1175,11 +1177,93 @@ h2 {
   }
 }
 
-@media (max-width: 640px) {
-  body {
-    overflow-x: hidden;
+@media (max-width: 820px) {
+  .topbar,
+  .section,
+  .footer {
+    width: min(100% - 32px, var(--max));
   }
 
+  .topbar {
+    gap: 12px 16px;
+  }
+
+  .brand {
+    max-width: calc(100% - 112px);
+  }
+
+  .brand > span:last-child {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .hero {
+    padding-top: 38px;
+    gap: 32px;
+  }
+
+  .hero h1 {
+    font-size: clamp(48px, 11.6vw, 92px);
+    line-height: 0.94;
+  }
+
+  .hero-lead {
+    max-width: 100%;
+    font-size: clamp(17px, 2.7vw, 21px);
+  }
+
+  .profile-panel {
+    width: min(100%, 560px);
+  }
+
+  .portrait-card {
+    min-height: 360px;
+  }
+
+  .card {
+    min-height: 250px;
+  }
+
+  .process-step {
+    min-height: 280px;
+    padding: 28px 20px;
+  }
+
+  .card h3,
+  .process-step h3 {
+    font-size: clamp(22px, 4.2vw, 32px);
+  }
+
+  .case-study {
+    padding: 34px;
+    gap: 26px;
+  }
+
+  .case-content h2 {
+    font-size: clamp(36px, 7vw, 54px);
+    line-height: 1.02;
+  }
+}
+
+@media (max-width: 720px) {
+  .work-grid,
+  .process-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-step {
+    min-height: auto;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .process-step span {
+    margin-bottom: 22px;
+  }
+}
+
+@media (max-width: 640px) {
   .topbar,
   .section,
   .footer {

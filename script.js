@@ -123,7 +123,7 @@ const languageButtons = document.querySelectorAll(".lang-button");
 const themeSwitch = document.querySelector(".theme-switch");
 const translatableNodes = document.querySelectorAll("[data-i18n]");
 const revealNodes = document.querySelectorAll(
-  ".section, .card, .chip, .process-step, .case-stack span, .stats span",
+  ".section:not(.hero), .card, .chip, .process-step, .case-stack span, .stats span",
 );
 let themeTransitionTimer;
 let languageTransitionTimer;

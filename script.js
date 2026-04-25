@@ -125,8 +125,7 @@ const revealNodes = document.querySelectorAll(
 );
 let themeTransitionTimer;
 let languageTransitionTimer;
-const languageLeaveDuration = 260;
-const languageEnterDuration = 520;
+const languageTransitionDuration = 320;
 
 function setTheme(theme, options = {}) {
   const isDark = theme === "dark";
@@ -188,7 +187,7 @@ function setLanguage(language, options = {}) {
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   clearTimeout(languageTransitionTimer);
-  document.documentElement.classList.remove("language-leaving", "language-entering");
+  document.documentElement.classList.remove("language-leaving");
 
   if (!shouldAnimate) {
     applyLanguage(language);
@@ -199,13 +198,13 @@ function setLanguage(language, options = {}) {
 
   languageTransitionTimer = setTimeout(() => {
     applyLanguage(language);
-    document.documentElement.classList.remove("language-leaving");
-    document.documentElement.classList.add("language-entering");
 
-    languageTransitionTimer = setTimeout(() => {
-      document.documentElement.classList.remove("language-entering");
-    }, languageEnterDuration);
-  }, languageLeaveDuration);
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.documentElement.classList.remove("language-leaving");
+      });
+    });
+  }, languageTransitionDuration);
 }
 
 languageButtons.forEach((button) => {

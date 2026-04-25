@@ -127,7 +127,7 @@ const revealNodes = document.querySelectorAll(
 );
 let themeTransitionTimer;
 let languageTransitionTimer;
-const languageTransitionDuration = 320;
+const languageTransitionDuration = 260;
 
 function setTheme(theme, options = {}) {
   const isDark = theme === "dark";
@@ -191,24 +191,18 @@ function setLanguage(language, options = {}) {
     !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   clearTimeout(languageTransitionTimer);
-  document.documentElement.classList.remove("language-leaving");
+  document.documentElement.classList.remove("language-settling");
 
   if (!shouldAnimate) {
     applyLanguage(language);
     return;
   }
 
-  document.documentElement.classList.add("language-leaving");
-  document.documentElement.dataset.activeLanguage = language;
+  applyLanguage(language);
+  document.documentElement.classList.add("language-settling");
 
   languageTransitionTimer = setTimeout(() => {
-    applyLanguage(language);
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        document.documentElement.classList.remove("language-leaving");
-      });
-    });
+    document.documentElement.classList.remove("language-settling");
   }, languageTransitionDuration);
 }
 

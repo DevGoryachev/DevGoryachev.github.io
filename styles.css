@@ -267,15 +267,12 @@ html[data-active-language="en"] .lang-button[data-lang="en"] {
 
 [data-i18n] {
   transition:
-    opacity 320ms cubic-bezier(0.21, 0.61, 0.35, 1),
-    transform 320ms cubic-bezier(0.21, 0.61, 0.35, 1),
-    filter 320ms cubic-bezier(0.21, 0.61, 0.35, 1);
+    color var(--theme-duration) var(--theme-ease),
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-html.language-leaving [data-i18n] {
-  opacity: 0;
-  filter: blur(1.5px);
-  transform: translateY(8px);
+html.language-settling [data-i18n] {
+  animation: languageSettle 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .section {
@@ -1082,6 +1079,16 @@ h2 {
   100% {
     opacity: 1;
     transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes languageSettle {
+  from {
+    transform: translateY(3px);
+  }
+
+  to {
+    transform: translateY(0);
   }
 }
 

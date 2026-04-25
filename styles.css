@@ -229,6 +229,23 @@ a {
   background: var(--ink);
 }
 
+[data-i18n] {
+  transition:
+    opacity 150ms ease,
+    transform 150ms ease,
+    filter 150ms ease;
+}
+
+html.language-leaving [data-i18n] {
+  opacity: 0;
+  filter: blur(2px);
+  transform: translateY(6px);
+}
+
+html.language-entering [data-i18n] {
+  animation: languageEnter 260ms cubic-bezier(0.21, 0.61, 0.35, 1) both;
+}
+
 .section {
   width: min(var(--max), calc(100% - 40px));
   margin: 0 auto;
@@ -925,6 +942,20 @@ h2 {
 
   to {
     background-position: 186px 186px;
+  }
+}
+
+@keyframes languageEnter {
+  from {
+    opacity: 0;
+    filter: blur(2px);
+    transform: translateY(-6px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
   }
 }
 

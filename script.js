@@ -124,6 +124,7 @@ const revealNodes = document.querySelectorAll(
   ".section, .card, .chip, .process-step, .case-stack span, .stats span",
 );
 let themeTransitionTimer;
+let languageTransitionTimer;
 
 function setTheme(theme, options = {}) {
   const isDark = theme === "dark";
@@ -156,7 +157,7 @@ function getInitialTheme() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-function setLanguage(language) {
+function applyLanguage(language) {
   const dictionary = translations[language];
 
   translatableNodes.forEach((node) => {
@@ -177,11 +178,39 @@ function setLanguage(language) {
   localStorage.setItem("site-language", language);
 }
 
+function setLanguage(language, options = {}) {
+  const currentLanguage = document.documentElement.lang || "ru";
+  const shouldAnimate =
+    options.animate === true &&
+    language !== currentLanguage &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  clearTimeout(languageTransitionTimer);
+  document.documentElement.classList.remove("language-leaving", "language-entering");
+
+  if (!shouldAnimate) {
+    applyLanguage(language);
+    return;
+  }
+
+  document.documentElement.classList.add("language-leaving");
+
+  languageTransitionTimer = setTimeout(() => {
+    applyLanguage(language);
+    document.documentElement.classList.remove("language-leaving");
+    document.documentElement.classList.add("language-entering");
+
+    languageTransitionTimer = setTimeout(() => {
+      document.documentElement.classList.remove("language-entering");
+    }, 260);
+  }, 150);
+}
+
 languageButtons.forEach((button) => {
-  button.addEventListener("click", () => setLanguage(button.dataset.lang));
+  button.addEventListener("click", () => setLanguage(button.dataset.lang, { animate: true }));
 });
 
-setLanguage(localStorage.getItem("site-language") || "ru");
+setLanguage(localStorage.getItem("site-language") || "ru", { animate: false });
 setTheme(getInitialTheme(), { animate: false });
 
 if (themeSwitch) {

@@ -270,12 +270,12 @@ html[data-active-language="en"] .lang-button[data-lang="en"] {
   transition:
     color var(--theme-duration) var(--theme-ease),
     filter 220ms ease,
-    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    translate 220ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html.language-magic [data-i18n] {
   filter: blur(0.85px);
-  transform: translateY(-1px);
+  translate: 0 -1px;
 }
 
 .section {
